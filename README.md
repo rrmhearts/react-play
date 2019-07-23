@@ -62,8 +62,37 @@ Then, spin up the container once the build is done:
 
 Open your browser to http://localhost:3001/ and you should see the app. Try making a change to the App component within your code editor. You should see the app hot-reload. Kill the server once done.
 
+## Adding Docker Compose
+Want to use Docker Compose? Add a docker-compose.yml file to the project root:
+```
+version: '3.7'
 
-ORIGINAL DOCUMENT
+services:
+
+  sample:
+    container_name: sample
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - '3001:3000'
+    environment:
+      - NODE_ENV=development
+```
+Take note of the volumes. Without the anonymous volume ('/app/node_modules'), the node_modules directory would be overwritten by the mounting of the host directory at runtime. In other words, this would happen:
+
+   * Build - The `node_modules` directory is created in the image.
+   * Run - The current directory is mounted into the container, overwriting the node_modules that were installed during the build.
+
+Build the image and fire up the container:
+`docker-compose up -d --build`
+Ensure the app is running in the browser and test hot-reloading again. Bring down the container before moving on:
+`docker-compose stop`
+
+## ORIGINAL DOCUMENT
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
