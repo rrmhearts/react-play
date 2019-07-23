@@ -1,3 +1,70 @@
+# React + Docker
+
+## Adding Docker
+### Project Setup
+Install Create React App globally:
+
+`npm install -g create-react-app@3.0.1`
+Generate a new app:
+```
+$ create-react-app sample
+$ cd sample
+```
+### Docker
+Add a Dockerfile to the project root:
+```
+# base image
+FROM node:12.2.0-alpine
+
+# set working directory
+WORKDIR /app
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+# install and cache app dependencies
+COPY package.json /app/package.json
+RUN npm install --silent
+RUN npm install react-scripts@3.0.1 -g --silent
+
+# start app
+CMD ["npm", "start"]
+```
+
+*Silencing the NPM output, via --silent, is a personal choice. It’s often frowned upon, though, since it can swallow errors. Keep this in mind so you don’t waste time debugging.*
+
+#### Add a .dockerignore:
+`node_modules`
+
+This will speed up the Docker build process as our local dependencies will not be sent to the Docker daemon.
+
+#### Build and tag the Docker image:
+
+`docker build -t sample:dev .`
+
+Then, spin up the container once the build is done:
+
+`docker run -v ${PWD}:/app -v /app/node_modules -p 3001:3000 --rm sample:dev`
+
+*If you run into an "ENOENT: no such file or directory, open '/app/package.json". error, you may need to add an additional volume: -v /app/package.json.*
+
+#### What’s happening here?
+
+1. The docker run command creates a new container instance, from the image we just created, and runs it.
+2. `-v ${PWD}:/app` mounts the code into the container at “/app”.
+
+*{PWD} may not work on Windows. See this Stack Overflow question for more info.*
+
+3. Since we want to use the container version of the “node_modules” folder, we configured another volume: `-v /app/node_modules`. You should now be able to remove the local “node_modules” flavor.
+4. `-p 3001:3000` exposes port 3000 to other Docker containers on the same network (for inter-container communication) and port 3001 to the host.
+
+5. Finally, `--rm` removes the container and volumes after the container exits.
+
+Open your browser to http://localhost:3001/ and you should see the app. Try making a change to the App component within your code editor. You should see the app hot-reload. Kill the server once done.
+
+
+ORIGINAL DOCUMENT
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
