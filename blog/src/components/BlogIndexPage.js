@@ -7,7 +7,9 @@ import Pagination from './Pagination'
 import styles from './BlogIndexPage.module.css'
 
 function BlogIndexPage({ blogRoot, pageCount, pageNumber, postRoutes }) {
+
   return (
+
     <div>
       <header>
         <h1 className={styles.title}>
@@ -29,7 +31,7 @@ function BlogIndexPage({ blogRoot, pageCount, pageNumber, postRoutes }) {
           pageCount={pageCount}
           pageNumber={pageNumber}
         />
-      }
+      }      
       <footer className={styles.footer}>
         <div>
           <a
@@ -44,7 +46,7 @@ function BlogIndexPage({ blogRoot, pageCount, pageNumber, postRoutes }) {
           <Link href='./tags'>
             Tags
           </Link> &bull;{' '}
-          <a href='https://github.com/frontarm/create-react-blog'>
+          <a href='https://github.com/rrmhearts'>
             Source
           </a>
         </div>

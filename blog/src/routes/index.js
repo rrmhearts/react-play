@@ -7,7 +7,60 @@ import BlogLayout from '../components/BlogLayout'
 import BlogPostLayout from '../components/BlogPostLayout'
 import siteMetadata from '../siteMetadata'
 import posts from './posts'
+import { push as Menu } from 'react-burger-menu'
+import { Link } from 'react-navi'
 
+var stylesBurger = {
+  bmBurgerButton: {
+    position: 'fixed',
+    width: '36px',
+    height: '30px',
+    left: '36px',
+    top: '36px'
+  },
+  bmBurgerBars: {
+    background: '#4aaaa0'
+  },
+  bmBurgerBarsHover: {
+    background: '#4aaaa0'
+  },
+  bmCrossButton: {
+    height: '24px',
+    width: '24px'
+  },
+  bmCross: {
+    background: '#4aaaa0'
+  },
+  bmMenuWrap: {
+    position: 'fixed',
+    height: '100%'
+  },
+  bmMenu: {
+    background: '#4aaaa0',
+    padding: '2.5em 1.5em 0',
+    fontSize: '1.15em'
+  },
+  bmMorphShape: {
+    fill: '#373a47'
+  },
+  bmItemList: {
+    color: '#4aaaa0',
+    padding: '0.8em'
+  },
+  bmItem: {
+    color: '#FFFFFF',
+    textDecoration: "none",
+    fontSize: '36px'
+  },
+  bmOverlay: {
+    background: 'rgba(0, 0, 0, 0.3)'
+  },
+  img: {
+    borderRadius: '100%',
+    display: 'block',
+    width: '100%',
+  }
+}
 // Split the posts into a list of chunks of the given size, and
 // then build index pages for each chunk.
 let chunks = chunk(posts, siteMetadata.indexPageSize)
@@ -42,6 +95,7 @@ let chunkPagePairs = chunks.map((chunk, i) => [
     return route({
       title: pageTitle,
       view: (
+
         <BlogIndexPage
           blogRoot={context.blogRoot}
           pageNumber={i + 1}
@@ -63,12 +117,28 @@ const routes = compose(
     // portion of the URL's pathname with the index page paths.
     let isViewingIndex = req.path === '/' || /^\/page\/\d+\/$/.test(req.path)
 
+    let getMenu = () => {
+      return (
+        <Menu styles={stylesBurger} pageWrapId={'page-wrap'} right={false}>
+          <img className='photoSide' src={ require('../images/ryanbaby.jpg') } alt=""/>
+          <h1 className="align-right">Ryan McCoppin</h1>
+          <Link className="bottom-links" href='/'><li>Home</li></Link>
+          <Link href='/about'><li>About</li></Link>
+          <Link href='/'><li>Blog</li></Link>
+        </Menu>
+      );
+    };
     // Render the application-wide layout
     return (
-      <BlogLayout
-        blogRoot={context.blogRoot}
-        isViewingIndex={isViewingIndex}
-      />
+      <div className="outer-container">
+        {getMenu()}
+        <div id="page-wrap">
+        <BlogLayout
+          blogRoot={context.blogRoot}
+          isViewingIndex={isViewingIndex}
+        />
+        </div>
+      </div>
     )
   }),
   mount({

@@ -1,0 +1,13 @@
+*editted on August 1, 2019*
+## Testing this blog site.
+**To create a new post,** add a new directory to `src/pages/posts` that is prefixed with the new post's publication date, then create a `post.js` file inside it:
+
+```jsx
+export default {
+  title: `Learn How To Build This Blog From Scratch`,
+  tags: ['react', 'navi'],
+  spoiler: "An online course with loads of live demos and exercises.",
+  getContent: () => import('./document.mdx'),
+}
+```
+This seemed to have worked better than I originally thought.

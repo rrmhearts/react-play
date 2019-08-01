@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather:400,400i,700,700i,900|Montserrat:900');
 
 :root {
-  --primary-color: #d23669;
-  --primary-color-light: rgb(255, 167, 196);
+  --primary-color: #4aaaa0;
+  --primary-color-light: rgb(190, 143, 56);
 }
 
 :global * {
@@ -49,4 +49,18 @@
 :global ol {
   margin-top: 0;
   margin-bottom: 1.75rem;
+}
+
+:global .photoSide {
+  border-radius: 100%;
+  display: block;
+  width: 100%;
+}
+
+:global .bottom-links {
+  margin-top: 50%;
+}
+
+:global .align-right {
+  text-align: right;
 }
