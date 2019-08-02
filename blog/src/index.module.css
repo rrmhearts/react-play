@@ -64,3 +64,13 @@
 :global .align-right {
   text-align: right;
 }
+
+:global .image-main {
+    display: block;
+    height: 25em;
+    width: 100%;
+    border-radius: 0;
+    position: relative;
+    border: 0;
+    box-sizing: inherit;
+}

@@ -139,6 +139,9 @@ const routes = compose(
       <div className="outer-container">
         {getMenu()}
         <div id="page-wrap">
+        <div>
+            <img className='image-main' src={ require('../images/mountain.jpg')} alt="" />
+        </div>
         <BlogLayout
           blogRoot={context.blogRoot}
           isViewingIndex={isViewingIndex}
