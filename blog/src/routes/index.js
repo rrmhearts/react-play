@@ -9,6 +9,7 @@ import siteMetadata from '../siteMetadata'
 import posts from './posts'
 import { push as Menu } from 'react-burger-menu'
 import { Link } from 'react-navi'
+import { SocialIcon } from 'react-social-icons';
 
 var stylesBurger = {
   bmBurgerButton: {
@@ -50,7 +51,7 @@ var stylesBurger = {
   bmItem: {
     color: '#FFFFFF',
     textDecoration: "none",
-    fontSize: '36px'
+    fontSize: '24px'
   },
   bmOverlay: {
     background: 'rgba(0, 0, 0, 0.3)'
@@ -122,9 +123,14 @@ const routes = compose(
         <Menu styles={stylesBurger} pageWrapId={'page-wrap'} right={false}>
           <img className='photoSide' src={ require('../images/ryanbaby.jpg') } alt=""/>
           <h1 className="align-right">Ryan McCoppin</h1>
-          <Link className="bottom-links" href='/'><li>Home</li></Link>
-          <Link href='/about'><li>About</li></Link>
-          <Link href='/'><li>Blog</li></Link>
+          <span>
+            <SocialIcon url="http://twitter.com/rrmhearts" />
+            <SocialIcon url="https://github.com/rrmhearts" />
+            <SocialIcon url="https://codepen.io/rrmhearts" />
+            <SocialIcon url="rrmhearts@gmail.com" />
+          </span>
+          <Link className='bottom-links' href='/'>[Home]</Link>
+          <Link href='/about'>[About]</Link>
         </Menu>
       );
     };
