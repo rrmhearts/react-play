@@ -42,7 +42,7 @@ var stylesBurger = {
     fontSize: '1.15em'
   },
   bmMorphShape: {
-    fill: '#373a47'
+    fill: '#4aaaa0'
   },
   bmItemList: {
     color: '#4aaaa0',
@@ -118,6 +118,14 @@ const routes = compose(
     // portion of the URL's pathname with the index page paths.
     let isViewingIndex = req.path === '/' || /^\/page\/\d+\/$/.test(req.path)
 
+    let footer_html = '<center>\
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">\
+                    <input type="hidden" name="cmd" value="_donations">\
+                    <input type="hidden" name="business" value="HC3RYLT2MDETC">\
+                    <input type="hidden" name="currency_code" value="USD">\
+                    <input type="image" value="Donate" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button">\
+                    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">\
+                </form></center>'
     let getMenu = () => {
       return (
         <Menu styles={stylesBurger} pageWrapId={'page-wrap'} right={false}>
@@ -131,6 +139,7 @@ const routes = compose(
           </span>
           <Link className='bottom-links' href='/'>[Home]</Link>
           <Link href='/about'>[About]</Link>
+          <Link href='https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=HC3RYLT2MDETC&currency_code=USD&source=url'>[Support]</Link>
         </Menu>
       );
     };

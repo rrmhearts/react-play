@@ -31,14 +31,13 @@ function BlogIndexPage({ blogRoot, pageCount, pageNumber, postRoutes }) {
           pageCount={pageCount}
           pageNumber={pageNumber}
         />
-      }      
+      }
       <footer className={styles.footer}>
         <div>
           <a
-            href='./rss.xml'
-            target='_blank'
+            href='http://mccoppinhome.com'
             style={{ float: 'right' }}>
-            RSS
+            © Ryan McCoppin
           </a>
           <Link href='./about'>
             About
